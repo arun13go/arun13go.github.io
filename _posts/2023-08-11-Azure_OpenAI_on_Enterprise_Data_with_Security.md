@@ -19,7 +19,7 @@ Authentication & Authorisation (AA) comes in to play in order to provide appropr
 Here we will focus on possible approaches in Azure cloud platform to implement Authentication & Authorisation (AA) to control the access. 
 Below high level reference design provide an overview for an application
 
-![alt text](Azure OpenAI Reference Security Architecture.jpg "Azure OpenAI Security")
+![alt text](/Azure OpenAI Reference Security Architecture.jpg "Azure OpenAI Security")
 
 
 
@@ -54,6 +54,7 @@ In the above flow, services that are specified can be integrated together to ach
 **OpenAI - Authentication (6):** To secure the OpenAI API interaction, there are 2 approach a) API Keys b) AAD. It is recommend to use AAD authentication using either managed identity or service principal and grant Azure services user RBAC role as specified here https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal
 
 AAD provide benefits over static API key which is exposed at app level.  OpenAI does provide API Key but it requires compliance to organisation security standards such as key rotation plus API key allow users to have full access operations such as model deployment, managing training data, fine tune and listing of all available models. So controlling API key access can be done however still need to be configured RBAC to secure the access
+
 **OpenAI service (7):**
 Once application authenticated successfully with AAD which issue access tokens with the access scope of services (ex: Cognitive Service) that can be used to pass across OpenAI API call either via Python SDK.
 
