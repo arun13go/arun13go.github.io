@@ -1,7 +1,7 @@
 ---
 title: 'Azure OpenAI on Enterprise Data with Security'
 date: 11-08-2023
-permalink: /posts/2012/08/blog-post-4/
+permalink: _posts/Azure_OpenAI_on_Enterprise_Data_with_Security.md
 tags:
   - OpenAI Security
   - Azure
