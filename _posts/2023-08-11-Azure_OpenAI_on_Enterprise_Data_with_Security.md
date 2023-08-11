@@ -27,20 +27,26 @@ Flow
 ======
 
 **App login (1)**: User login with credential to access to OpenAI enable application that are integrated with AAD (Azure Active Directory).
+
 **AAD (2):**  User credentials are validated and authenticated and AAD issue time bounded authentication tokens. Reference _______
+
 **Application (3):** On user authentication is successful, use case specific services that are implemented would be used. Ex: Cognitive Search or similar search tool with vector store will be used if use case demands to have embeddings search. AI Document Intelligence or any open source tool to crack to extract entities from documents for summarisation use cases. Similarly Azure Video indexer or Translator or Whisper API used to extract transcription of the audio / video files.
 Authorisation - RBAC (Role Based Access Control):  Authorisation at application level enable to control access irrespective of the service specific tools that we use. But it requires build bespoke component to manage access based on the user permission or profile. Though it is not an ideal place but it provide some level of controls. 
+
 **Stage (4):**
 Here use case specific services comes to play and enforce fine-grained access based on the user profile. Azure provided RBAC (Role Based Access Control) across some of the these services. In this stage (a-e) any one of the services or combination of services can be used considering the use cases and its complexity.
+
 **Cog Search (4-a):**
 Cognitive search index the files, documents and data in order to provide search services. Cognitive search comes with filters to deny access  to documents by trim result based on user profiles. This can be done as part of the indexing with associated groups (user should be part of group). Approach details https://learn.microsoft.com/en-us/azure/search/search-security-trimming-for-azure-search-with-aad
 Unfortunately above approach at present support only documents and doesn’t support row or column level records.
 To overcome this gap, following alternative approach would be possible:
 a)	Build separate index for each of the use group based on the profile / group but it is not scalable if you have too many user groups.
 b)	Build custom RBAC mechanisms in Application code as explained in stage (3).
+
 **Vector Store (4-b):**
 Embeddings (converted binary value of the textual info with semantic context) that are stored in Vector store. Search tool can be used on top of the vector store to perform semantic search to find similar meaning of the search query. Cognitive Search provide Vector Store (currently in private preview) or other store such as Redis offers similar capability.  Redis store provide ACL https://redis.com/blog/rediscover-redis-security-with-redis-enterprise-6/ https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-configure-role-based-access-control
 AI Document Intelligence (4-c): Azure AI document intelligence (Azure Form Recognizer)  handles the document cracking by extract entities / content from the documents. Unfortunately at present it doesn’t support RBAC hence custom build at Application level RBAC is only option. However RBAC approach can be implemented if any combination of services that support the capability (ex AI Document Intelligence + Redis Store + Cognitive Search)
+
 **Azure Functions (4-d):**
 If use case demands to implement Azure functions calling bespoke code in serverless world such as orchestrate series of event,  RBAC approach at Azure functions level to control the access to data https://learn.microsoft.com/en-us/azure/architecture/serverless-quest/functions-app-security#set-up-azure-role-based-access-control-azure-rbac
 
