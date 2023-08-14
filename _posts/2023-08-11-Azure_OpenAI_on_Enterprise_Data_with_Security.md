@@ -66,7 +66,6 @@ AAD provides benefits over a static API key, which is exposed at the app level. 
 **OpenAI service (7):**
 Once the application (step 6) is successfully authenticated with AAD tokens, it can have interaction with the OpenAI API model either via Python or SDK calls.
 
-At present, these approaches are available as this space is evolving rapidly, so I would expect elegant solutions to be available very soon.
 
 **Summary:**
 
@@ -74,3 +73,6 @@ At present, these approaches are available as this space is evolving rapidly, so
 * Enforce authorisation (fine-grained access) at the data source level.
 * A combination of use case specific services can also offer RBAC, but it involves complexity.
 * Log at application level (API management or bespoke) to track OpenAI interaction.
+
+
+At present, these approaches are available as this space is evolving rapidly, so I would expect elegant solutions to be available very soon.
