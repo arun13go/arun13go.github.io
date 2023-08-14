@@ -8,9 +8,6 @@ tags:
   - Authenitcation & Authorisation
 ---
 
-
-
-
 Azure OpenAI Service provides powerful large language models (LLM) which can be used in many use cases (searching, knowledge mining, summarisation, classification, and sentiment analysis) and bring massive value to businesses by looking at both structured and unstructured data. 
 Organisations are beginning to explore and, in fact, opt in to Azure OpenAI to uncover largely untapped insights effectively on their unstructured data, such as Team Chat, Slack conversion, Teams Video / audio calls, Internal documents, messages, emails, and images that are stored across different ecosystems, e.g., SharePoint, collaboration tools (JIRA, Confluence), internal sites, and data stores.
 
