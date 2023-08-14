@@ -11,7 +11,7 @@ title                    : "ArunGo'Log"
 title_separator          : "-"
 name                     : &name "Arungo"
 description              : &description "Hi there, welcome to my blob. My thougts and leanrings are shared here"
-url                      : https://arun13go.github.io/year-archive/
+url                      : https://arun13go.github.io
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "arun13go/arungo13.github.io"
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
