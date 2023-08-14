@@ -7,6 +7,6 @@ redirect_from:
   - /about/
   - /about.html
 ---
-Sharing my mind and thougths about Architecture Cloud, AI, Data Science and 
+Sharing my mind and thougths about Architecture, Cloud, AI, Data Science
 ======
 [Please check this out] (/year-archive/)
