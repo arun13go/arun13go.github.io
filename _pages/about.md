@@ -8,5 +8,5 @@ redirect_from:
   - /about.html
 ---
 
-Sharing my mind and thougths about Architecture, Cloud, AI, Data Science
+Sharing my learning and thougths about Architecture, Cloud, AI, Data Science
 [Please check this out](/year-archive/)
