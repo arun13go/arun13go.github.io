@@ -37,7 +37,7 @@ Authorisation - RBAC (Role Based Access Control):  Authorisation at application 
 Here use case specific services comes to play and enforce fine-grained access based on the user profile. Azure provided RBAC (Role Based Access Control) across some of the these services. In this stage (a-e) any one of the services or combination of services can be used considering the use cases and its complexity.
 
 **Cog Search (4-a):**
-Cognitive search index the files, documents and data in order to provide search services. Cognitive search comes with filters to deny access  to documents by trim result based on user profiles. This can be done as part of the indexing with associated groups (user should be part of group). Approach details https://learn.microsoft.com/en-us/azure/search/search-security-trimming-for-azure-search-with-aad
+Cognitive search index the files, documents and data in order to provide search services. Cognitive search comes with filters to deny access  to documents by trim result based on user profiles. This can be done as part of the indexing with associated groups (user should be part of group). [Approach details] (https://learn.microsoft.com/en-us/azure/search/search-security-trimming-for-azure-search-with-aad)
 Unfortunately above approach at present support only documents and doesn’t support row or column level records.
 To overcome this gap, following alternative approach would be possible:
 a)	Build separate index for each of the use group based on the profile / group but it is not scalable if you have too many user groups.
