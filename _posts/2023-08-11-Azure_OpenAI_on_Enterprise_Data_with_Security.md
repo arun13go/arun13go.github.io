@@ -8,6 +8,7 @@ tags:
   - Authenitcation & Authorisation
 ---
 
+
 Azure OpenAI on Enterprise Data with Security
 ======
 
