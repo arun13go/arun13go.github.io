@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Arun Site Title"
+title                    : "Arungo'Log"
 title_separator          : "-"
 name                     : &name "Arungo"
 description              : &description "Hi there, welcome to my blob. My thougts and leanrings are shared here"
@@ -82,7 +82,7 @@ analytics:
 author:
   name             : "Arun"
   avatar           : "profile.png"
-  bio              : "WEWEWE Your biography for the left-hand sidebar"
+  bio              : "Hi there, welcome to my blob. My thougts and leanrings are shared here"
   employer         :
   github           : "arun13go"
   linkedin         : "https://www.linkedin.com/in/arunkumargopalan/"
