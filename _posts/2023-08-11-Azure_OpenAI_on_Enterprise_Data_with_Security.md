@@ -66,6 +66,7 @@ AAD provides benefits over a static API key, which is exposed at the app level. 
 **OpenAI service (7):**
 Once the application (step 6) is successfully authenticated with AAD tokens, it can have interaction with the OpenAI API model either via Python or SDK calls.
 
+At present, these approaches are available as this space is evolving rapidly, so I would expect elegant solutions to be available very soon.
 **Summary:**
 
 * Use AAD to authenticate the user request without exposing the OpenAI API Key.
