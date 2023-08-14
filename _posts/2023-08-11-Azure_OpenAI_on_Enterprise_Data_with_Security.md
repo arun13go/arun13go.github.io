@@ -38,7 +38,7 @@ Here use case specific services comes to play and enforce fine-grained access ba
 
 **Cog Search (4-a):**
 Cognitive search index the files, documents and data in order to provide search services. Cognitive search comes with filters to deny access  to documents by trim result based on user profiles. This can be done as part of the indexing with associated groups (user should be part of group). 
-[Approach details](https://learn.microsoft.com/en-us/azure/search/search-security-trimming-for-azure-search-with-aad)
+[Approach details](https://learn.microsoft.com/en-us/azure/search/search-security-trimming-for-azure-search-with-aad).
 Unfortunately above approach at present support only documents and doesn’t support row or column level records.
 To overcome this gap, following alternative approach would be possible:
 a)	Build separate index for each of the use group based on the profile / group but it is not scalable if you have too many user groups.
@@ -48,10 +48,10 @@ b)	Build custom RBAC mechanisms in Application code as explained in stage (3).
 Embeddings (converted binary value of the textual info with semantic context) that are stored in Vector store. Search tool can be used on top of the vector store to perform semantic search to find similar meaning of the search query. Cognitive Search provide Vector Store (currently in private preview) or other store such as Redis offers similar capability. [Redis store provide ACL](https://redis.com/blog/rediscover-redis-security-with-redis-enterprise-6/) 
 <https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-configure-role-based-access-control>
 
-**AI Document Intelligence (4-c):** Azure AI document intelligence (Azure Form Recognizer)  handles the document cracking by extract entities / content from the documents. Unfortunately at present it doesn’t support RBAC hence custom build at Application level RBAC is only option. However RBAC approach can be implemented if any combination of services that support the capability (ex AI Document Intelligence + Redis Store + Cognitive Search)
+**AI Document Intelligence (4-c):** Azure AI document intelligence [formerly Azure Form Recognizer](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview?view=doc-intel-3.1.0)  handles the document cracking by extract entities / content from the documents. Unfortunately at present it doesn’t support RBAC hence custom build at Application level RBAC is only option. However RBAC approach can be implemented if any combination of services that support the capability (ex AI Document Intelligence + Redis Store + Cognitive Search)
 
 **Azure Functions (4-d):**
-If use case demands to implement Azure functions calling bespoke code in serverless world such as orchestrate series of event,  RBAC approach at Azure functions level to control the access to data https://learn.microsoft.com/en-us/azure/architecture/serverless-quest/functions-app-security#set-up-azure-role-based-access-control-azure-rbac
+If use case demands to implement Azure functions calling bespoke code in serverless world such as orchestrate series of event,  RBAC approach at Azure functions level to control the access to data <https://learn.microsoft.com/en-us/azure/architecture/serverless-quest/functions-app-security#set-up-azure-role-based-access-control-azure-rbac>
 
 **Plugins / Connectors (4-e):** Plugins are tools designed specifically for OpenAI LL Models with safety as a core principle, and help access up-to-date information, run computations, or use third-party services. Plugins can be custom code to integrate with data sources and OpenAI to provide seamless interaction of the data with LL Models. Plugins can be embed RBAC at the code level to control the access of the data sources.
 Similarly connectors to connect data sources to retrieve data for OpenAI API calls. So access controls should be considered at connectors level.
