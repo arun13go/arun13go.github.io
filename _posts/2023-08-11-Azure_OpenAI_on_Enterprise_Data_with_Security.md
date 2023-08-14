@@ -14,6 +14,7 @@ Organisations are beginning to explore and, in fact, opt in to Azure OpenAI to u
 As the organisation wants to monetize the information but faces security challenges to protect the sensitive data. They want these capabilities, but personas who have access to this info should be restricted based on their user profile. Ex HR functions want employees to search and chat with data about HR-related queries and policies; however, their access should be restricted based on their profile, and they should not have to access other people’s confidential info such as personal details, pay, and grade. Similarly, organisations have multiple business units, which require separation of access with a lot of restrictions on documents or files based on their business units. This requires appropriate security control (fine-grained access control) in order to protect the confidentiality of the data based on the persona’s profile or access level within the organisation.
 Authentication & Authorisation (AA) come into play in order to provide an appropriate level of security controls.
 Here we will focus on possible approaches on the Azure cloud platform to implement Authentication & Authorisation (AA) to control access. 
+
 Below, high-level reference designs provide an overview of an application.
 
 ![alt text](/images/Azure OpenAI Reference Security Architecture.jpg "Azure OpenAI Security")
@@ -22,43 +23,52 @@ Below, high-level reference designs provide an overview of an application.
 Flow
 ======
 
-**App login (1)**: User login with credential to access to OpenAI enable application that are integrated with AAD (Azure Active Directory).
+**App login (1):** User login with credentials to access OpenAI-enabled applications that are integrated with AAD (Azure Active Directory).
 
-**AAD (2):**  User credentials are validated and authenticated and AAD issue time bounded authentication tokens. Reference _______
+**AAD (2):** User credentials are validated and authenticated, and AAD issues a time-bounded authentication token.
 
-**Application (3):** On user authentication is successful, use case specific services that are implemented would be used. Ex: Cognitive Search or similar search tool with vector store will be used if use case demands to have embeddings search. AI Document Intelligence or any open source tool to crack to extract entities from documents for summarisation use cases. Similarly Azure Video indexer or Translator or Whisper API used to extract transcription of the audio / video files.
-Authorisation - RBAC (Role Based Access Control):  Authorisation at application level enable to control access irrespective of the service specific tools that we use. But it requires build bespoke component to manage access based on the user permission or profile. Though it is not an ideal place but it provide some level of controls. 
+**Application (3):** An application (web or chat app) validates AAD tokens and forwards or processes the request to specific services (use case). Ex: Cognitive Search or similar search tools with vector stores will be used if the use case demands embedding search. AI Document Intelligence or any open source tool used to crack the document to extract entities for summarisation. Similarly, the Azure Video Indexer, Translator, or Whisper API is used to extract transcriptions of the audio and video files.
+Authorisation - RBAC (Role Based Access Control):  Now, enforcing fine-grained access at the application level enables control access irrespective of the underlying service or tools used. But it requires building bespoke code to manage access based on the user profile. Though it is not an ideal place, it provides some level of control.
 
 **Stage (4):**
-Here use case specific services comes to play and enforce fine-grained access based on the user profile. Azure provided RBAC (Role Based Access Control) across some of the these services. In this stage (a-e) any one of the services or combination of services can be used considering the use cases and its complexity.
+Here, use case specific services come into play and enforce fine-grained access based on the user profile. Azure provides RBAC (Role Based Access Control) across some of these services. In stages (a–e), any one of the services or combination of services can be used, considering the use case and its complexity, so it’s possible to employ RBAC in any one of the services.
 
 **Cog Search (4-a):**
-Cognitive search index the files, documents and data in order to provide search services. Cognitive search comes with filters to deny access  to documents by trim result based on user profiles. This can be done as part of the indexing with associated groups (user should be part of group). 
+Cognitive search indexes files, documents, and data in order to provide search services. Cognitive search comes with filters to deny access to documents by trimming results based on user profiles. This can be done as part of the indexing with associated groups (the user should be part of the group). 
 [Approach details](https://learn.microsoft.com/en-us/azure/search/search-security-trimming-for-azure-search-with-aad).
-Unfortunately above approach at present support only documents and doesn’t support row or column level records.
-To overcome this gap, following alternative approach would be possible:
-a)	Build separate index for each of the use group based on the profile / group but it is not scalable if you have too many user groups.
-b)	Build custom RBAC mechanisms in Application code as explained in stage (3).
+
+Unfortunately, the above approach at present supports only whole documents (whole) and doesn’t support part of the documents or row- or column-level records.
+To overcome this gap, the following alternative approaches are available:
+a)	Build a separate index for each of the user groups based on their profile or group, but it is not scalable if you have too many user groups.
+b)	Build custom RBAC mechanisms in the application as explained in Stage 3.
 
 **Vector Store (4-b):**
-Embeddings (converted binary value of the textual info with semantic context) that are stored in Vector store. Search tool can be used on top of the vector store to perform semantic search to find similar meaning of the search query. Cognitive Search provide Vector Store (currently in private preview) or other store such as Redis offers similar capability. [Redis store provide ACL](https://redis.com/blog/rediscover-redis-security-with-redis-enterprise-6/) 
+Embeddings (the converted binary value of the textual information with semantic context) that are stored in the Vector store. The search tool can be used on top of the vector store to perform semantic search to find similar meanings to the search query. Cognitive Search provides Vector Store (currently in private preview) or other stores such as Redis that offer similar capabilities. [Redis store provide ACL](https://redis.com/blog/rediscover-redis-security-with-redis-enterprise-6/) 
 <https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-configure-role-based-access-control>
 
-**AI Document Intelligence (4-c):** Azure AI document intelligence [(formerly Azure Form Recognizer)](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview?view=doc-intel-3.1.0)  handles the document cracking by extract entities / content from the documents. Unfortunately at present it doesn’t support RBAC hence custom build at Application level RBAC is only option. However RBAC approach can be implemented if any combination of services that support the capability (ex AI Document Intelligence + Redis Store + Cognitive Search)
+**AI Document Intelligence (4-c):** Azure AI document intelligence [(formerly Azure Form Recognizer)](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview?view=doc-intel-3.1.0)  handles the document cracking by extracting the entities and content from the documents, which can be used for summarisation or classification. Unfortunately, at present, Azure AI Document Intelligence doesn’t support RBAC. However, the RBAC approach can be implemented with any combination of services that support RBAC capability (ex. AI Document Intelligence + Redis Store + Cognitive Search).
 
 **Azure Functions (4-d):**
-If use case demands to implement Azure functions calling bespoke code in serverless world such as orchestrate series of event,  RBAC approach at Azure functions level to control the access to data <https://learn.microsoft.com/en-us/azure/architecture/serverless-quest/functions-app-security#set-up-azure-role-based-access-control-azure-rbac>
+If the use case demands to implement Azure functions calling bespoke code in the serverless world, such as orchestrating events, an RBAC approach is possible at the Azure functions level to control access to data. <https://learn.microsoft.com/en-us/azure/architecture/serverless-quest/functions-app-security#set-up-azure-role-based-access-control-azure-rbac>
 
-**Plugins / Connectors (4-e):** Plugins are tools designed specifically for OpenAI LL Models with safety as a core principle, and help access up-to-date information, run computations, or use third-party services. Plugins can be custom code to integrate with data sources and OpenAI to provide seamless interaction of the data with LL Models. Plugins can be embed RBAC at the code level to control the access of the data sources.
-Similarly connectors to connect data sources to retrieve data for OpenAI API calls. So access controls should be considered at connectors level.
+**Plugins / Connectors (4-e):** Plugins are tools designed specifically for OpenAI LL Models with safety as a core principle that help access up-to-date information, run computations, or use third-party services. Plugins can be custom code to integrate with data sources and OpenAI to provide seamless interaction of the data with LL Models. Plugins can be embed RBAC at the code level to control the access of the data sources.
 
-In the above flow, services that are specified can be integrated together to achieve use case needs. Services that are direct connect to data sources should responsible for access control or it can be control at data source level ie DB, files or events based on the users privileges. But downside of this approach would be each individual users / group should be created rather than using service account which might be management overhead if organisation is very large.
+Similarly, connectors to integrate data sources to retrieve data for OpenAI API calls. So one approach is to consider the access controls at the connector level. Another approach would be to have access control at the data source level, i.e., DB, files, or events, based on the user's privileges. But the downside of this approach is account management overhead, as each individual user or group account should be created rather than using a service account.
 
-**Orchestration (5):** Application use the backend as orchestration services to manage the OpenAI interaction such as maintain “in-context” background with grounding data as well as perform identity authentication before calling OpenAI APIs. Here wrapper tools like LangChain or Semantic Kernel used to manage interaction with OpenAI. Also it enable application to log / audit the prompting and associated events to track the interaction or OpenAI model completion.
+**Orchestration (5):** Applications act as orchestrators of services to manage the OpenAI interaction, such as maintaining "in-context" background with grounding data as well as performing identity authentication before calling OpenAI APIs. Here, wrapper tools like LangChain or Semantic Kernel can be used to manage interaction with OpenAI.
 
-**OpenAI - Authentication (6):** To secure the OpenAI API interaction, there are 2 approach a) API Keys b) AAD. It is recommend to use AAD authentication using either managed identity or service principal and grant Azure services user RBAC role as specified [here](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal)
+Also, it enables applications to log or audit the prompting and associated events to track the OpenAI model interaction through API Management (be mindful of throughput implications).
 
-AAD provide benefits over static API key which is exposed at app level.  OpenAI does provide API Key but it requires compliance to organisation security standards such as key rotation plus API key allow users to have full access operations such as model deployment, managing training data, fine tune and listing of all available models. So controlling API key access can be done however still need to be configured RBAC to secure the access
+**OpenAI - Authentication (6):** To secure the OpenAI API interaction, there are 2 approaches: a) API keys and b) AAD. It is recommended to use AAD authentication using either managed identity or service principal to grant access with the Azure Services user RBAC role as specified. [here](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal)
+
+AAD provides benefits over a static API key, which is exposed at the app level. OpenAI does provide API keys, but it requires compliance with organisation security standards such as key rotation and API keys allow users to have full access to operations such as model deployment, managing training data, fine tuning, and listing all available models. So controlling API key access can be done, but it still needs to be configured in RBAC to secure the access.
 
 **OpenAI service (7):**
-Once application authenticated successfully with AAD which issue access tokens with the access scope of services (ex: Cognitive Service) that can be used to pass across OpenAI API call either via Python SDK.
+Once the application (step 6) is successfully authenticated with AAD tokens, it can have interaction with the OpenAI API model either via Python or SDK calls.
+
+**Summary:**
+
+* Use AAD to authenticate the user request without exposing the OpenAI API Key.
+* Enforce authorisation (fine-grained access) at the data source level.
+* A combination of use case specific services can also offer RBAC, but it involves complexity.
+* Log at application level (API management or bespoke) to track OpenAI interaction.
