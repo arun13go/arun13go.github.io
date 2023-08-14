@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Arungo'Log"
+title                    : "ArunGo'Log"
 title_separator          : "-"
 name                     : &name "Arungo"
 description              : &description "Hi there, welcome to my blob. My thougts and leanrings are shared here"
