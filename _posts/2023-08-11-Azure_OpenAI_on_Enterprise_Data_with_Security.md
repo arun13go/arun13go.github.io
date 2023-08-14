@@ -22,7 +22,6 @@ Below high level reference design provide an overview for an application
 ![alt text](/images/Azure OpenAI Reference Security Architecture.jpg "Azure OpenAI Security")
 
 
-
 Flow
 ======
 
@@ -48,7 +47,7 @@ b)	Build custom RBAC mechanisms in Application code as explained in stage (3).
 Embeddings (converted binary value of the textual info with semantic context) that are stored in Vector store. Search tool can be used on top of the vector store to perform semantic search to find similar meaning of the search query. Cognitive Search provide Vector Store (currently in private preview) or other store such as Redis offers similar capability. [Redis store provide ACL](https://redis.com/blog/rediscover-redis-security-with-redis-enterprise-6/) 
 <https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-configure-role-based-access-control>
 
-**AI Document Intelligence (4-c):** Azure AI document intelligence [formerly Azure Form Recognizer](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview?view=doc-intel-3.1.0)  handles the document cracking by extract entities / content from the documents. Unfortunately at present it doesn’t support RBAC hence custom build at Application level RBAC is only option. However RBAC approach can be implemented if any combination of services that support the capability (ex AI Document Intelligence + Redis Store + Cognitive Search)
+**AI Document Intelligence (4-c):** Azure AI document intelligence [(formerly Azure Form Recognizer)](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview?view=doc-intel-3.1.0)  handles the document cracking by extract entities / content from the documents. Unfortunately at present it doesn’t support RBAC hence custom build at Application level RBAC is only option. However RBAC approach can be implemented if any combination of services that support the capability (ex AI Document Intelligence + Redis Store + Cognitive Search)
 
 **Azure Functions (4-d):**
 If use case demands to implement Azure functions calling bespoke code in serverless world such as orchestrate series of event,  RBAC approach at Azure functions level to control the access to data <https://learn.microsoft.com/en-us/azure/architecture/serverless-quest/functions-app-security#set-up-azure-role-based-access-control-azure-rbac>
@@ -60,7 +59,7 @@ In the above flow, services that are specified can be integrated together to ach
 
 **Orchestration (5):** Application use the backend as orchestration services to manage the OpenAI interaction such as maintain “in-context” background with grounding data as well as perform identity authentication before calling OpenAI APIs. Here wrapper tools like LangChain or Semantic Kernel used to manage interaction with OpenAI. Also it enable application to log / audit the prompting and associated events to track the interaction or OpenAI model completion.
 
-**OpenAI - Authentication (6):** To secure the OpenAI API interaction, there are 2 approach a) API Keys b) AAD. It is recommend to use AAD authentication using either managed identity or service principal and grant Azure services user RBAC role as specified here https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal
+**OpenAI - Authentication (6):** To secure the OpenAI API interaction, there are 2 approach a) API Keys b) AAD. It is recommend to use AAD authentication using either managed identity or service principal and grant Azure services user RBAC role as specified [here](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal)
 
 AAD provide benefits over static API key which is exposed at app level.  OpenAI does provide API Key but it requires compliance to organisation security standards such as key rotation plus API key allow users to have full access operations such as model deployment, managing training data, fine tune and listing of all available models. So controlling API key access can be done however still need to be configured RBAC to secure the access
 
