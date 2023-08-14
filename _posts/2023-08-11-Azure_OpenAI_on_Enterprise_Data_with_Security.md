@@ -15,13 +15,13 @@ tags:
 Azure OpenAI on Enterprise Data with Security
 ======
 
-Azure OpenAI Service provides powerful large language models (LLM) which can be used in many use cases (searching, knowledge mining, summarise, classification and sentiment analysis) and bring the massive value to business by looking at both structured and unstructured data. 
-Organisation beginning to explore and in fact opt in Azure OpenAI to uncover largely untapped insights effectively on their unstructured data. Unstructured data including Team Chat, Slack conversion, Teams Video / audio calls, Internal documents, messages, emails and images that are stored across different ecosystems ex:  SharePoint, collaboration tools (JIRA, Confluence), internal sites and stores. 
+Azure OpenAI Service provides powerful large language models (LLM) which can be used in many use cases (searching, knowledge mining, summarisation, classification, and sentiment analysis) and bring massive value to businesses by looking at both structured and unstructured data. 
+Organisations are beginning to explore and, in fact, opt in to Azure OpenAI to uncover largely untapped insights effectively on their unstructured data, such as Team Chat, Slack conversion, Teams Video / audio calls, Internal documents, messages, emails, and images that are stored across different ecosystems, e.g., SharePoint, collaboration tools (JIRA, Confluence), internal sites, and data stores.
 
-As organisation wants monetise the information but facing security challenges to protect the sensitive data. They want this capability within organizations but personas who access the info should be restricted based on their user profile. Ex HR functions want employees to search and chat with data about HR related queries and policies however their access should be restricted and should not have to access other’s confidential info such as other employee’s personal info, pay and other confidential information. . Similarly organisation has multiple business unit which requires separation of access with lot of restriction to documents or files based on their business unit. This requires security control (fine-grained access control) in order to protect the confidentiality of the data based on the persona’s profile or level within the organisations.
-Authentication & Authorisation (AA) comes in to play in order to provide appropriate level of security controls.
-Here we will focus on possible approaches in Azure cloud platform to implement Authentication & Authorisation (AA) to control the access. 
-Below high level reference design provide an overview for an application
+As the organisation wants to monetize the information but faces security challenges to protect the sensitive data. They want these capabilities, but personas who have access to this info should be restricted based on their user profile. Ex HR functions want employees to search and chat with data about HR-related queries and policies; however, their access should be restricted based on their profile, and they should not have to access other people’s confidential info such as personal details, pay, and grade. Similarly, organisations have multiple business units, which require separation of access with a lot of restrictions on documents or files based on their business units. This requires appropriate security control (fine-grained access control) in order to protect the confidentiality of the data based on the persona’s profile or access level within the organisation.
+Authentication & Authorisation (AA) come into play in order to provide an appropriate level of security controls.
+Here we will focus on possible approaches on the Azure cloud platform to implement Authentication & Authorisation (AA) to control access. 
+Below, high-level reference designs provide an overview of an application.
 
 ![alt text](/images/Azure OpenAI Reference Security Architecture.jpg "Azure OpenAI Security")
 
@@ -69,4 +69,3 @@ AAD provide benefits over static API key which is exposed at app level.  OpenAI 
 
 **OpenAI service (7):**
 Once application authenticated successfully with AAD which issue access tokens with the access scope of services (ex: Cognitive Service) that can be used to pass across OpenAI API call either via Python SDK.
-
