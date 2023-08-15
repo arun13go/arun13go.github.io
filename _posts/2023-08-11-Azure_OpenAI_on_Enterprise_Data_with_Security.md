@@ -27,7 +27,7 @@ Flow
 
 **AAD (2):** User credentials are validated and authenticated, and AAD issues a time-bounded authentication token.
 
-**Application (3):** An application (web or chat app) validates AAD tokens and forwards or processes the request to specific services (use case). Ex: Cognitive Search or similar search tools with vector stores will be used for embedding search. AI Document Intelligence or any open source tool used to crack the document to extract entities for summarisation. Similarly, the Azure Video Indexer, Translator, or Whisper API is used to extract transcriptions of the audio and video files.
+**Application (3):** An application (web or chat app) validates AAD tokens and forwards or processes the request to specific services (use case). Ex: Cognitive Search or similar search tools with vector stores will be used for embedding search. AI Document Intelligence [(formerly Azure Form Recognizer)](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview?view=doc-intel-3.1.0) or any open source tool used to crack the document to extract entities for summarisation. Similarly, the Azure Video Indexer, Translator, or Whisper API is used to extract transcriptions of the audio and video files.
 
 Authorisation - RBAC (Role Based Access Control):  Now, enforcing fine-grained access at the application level enables control access irrespective of the underlying service or tools used. But it requires building bespoke code to manage access based on the user profile. Though it is not an ideal place, it provides some level of control.
 
@@ -47,7 +47,7 @@ Unfortunately, the above approach at present supports only whole documents and d
 Embeddings (the converted binary value of the textual information with semantic context) that are stored in the Vector store. The search tool can be used on top of the vector store to perform semantic search to find similar meanings to the search query. Cognitive Search provides Vector Store (currently in private preview) or other stores such as Redis that offer similar capabilities. [Redis store provide ACL](https://redis.com/blog/rediscover-redis-security-with-redis-enterprise-6/) 
 <https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-configure-role-based-access-control>
 
-**AI Document Intelligence (4-c):** Azure AI document intelligence [(formerly Azure Form Recognizer)](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview?view=doc-intel-3.1.0)  handles the document cracking by extracting the entities and content from the documents, which can be used for summarisation or classification. Unfortunately, at present, Azure AI Document Intelligence doesn’t support RBAC. However, the RBAC approach can be implemented with any combination of services that support RBAC capability (ex. AI Document Intelligence + Redis Store + Cognitive Search).
+**AI Document Intelligence (4-c):** Azure AI document intelligence handles the document cracking by extracting the entities and content from the documents, which can be used for summarisation or classification. Unfortunately, at present, Azure AI Document Intelligence doesn’t support RBAC. However, the RBAC approach can be implemented with any combination of services that support RBAC capability (ex. AI Document Intelligence + Redis Store + Cognitive Search).
 
 **Azure Functions (4-d):**
 If the use case demands to implement Azure functions calling bespoke code in the serverless world, such as orchestrating events, an RBAC approach is possible at the Azure functions level to control access to data. <https://learn.microsoft.com/en-us/azure/architecture/serverless-quest/functions-app-security#set-up-azure-role-based-access-control-azure-rbac>
@@ -63,7 +63,7 @@ Also, it enables applications to log or audit the prompting and associated event
 **OpenAI - Authentication (6):** To secure the OpenAI API interaction, there are 2 approaches: 
 1. API keys 
 2. Azure Active Directory (AAD)
-It is recommended to use AAD authentication using either managed identity or service principal to grant access with the Azure Services user RBAC role as specified. [here](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal)
+It is recommended to use AAD authentication using either managed identity or service principal to grant access with the Azure Services user RBAC role as [specified](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal)
 
 AAD provides benefits over a static API key, which is exposed at the app level. OpenAI does provide API keys, but it requires compliance with organisation security standards such as key rotation and API keys allow users to have full access to operations such as model deployment, managing training data, fine tuning, and listing all available models. So controlling API key access can be done, but it still needs to be configured in RBAC to secure the access.
 
