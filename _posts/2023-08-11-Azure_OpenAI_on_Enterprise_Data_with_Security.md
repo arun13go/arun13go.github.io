@@ -41,8 +41,8 @@ Cognitive search indexes files, documents, and data in order to provide search s
 Unfortunately, the above approach at present supports only whole documents and doesn’t support part of the documents or row- or column-level records.
 
 To overcome this gap, the following alternative approaches are available:
-a)	Build a separate index for each of the user groups based on their profile or group, but it is not scalable if you have too many user groups.
-b)	Build custom RBAC mechanisms in the application as explained in Stage 3.
+a. Build a separate index for each of the user groups based on their profile or group, but it is not scalable if you have too many user groups.
+b. Build custom RBAC mechanisms in the application as explained in Stage 3.
 
 **Vector Store (4-b):**
 Embeddings (the converted binary value of the textual information with semantic context) that are stored in the Vector store. The search tool can be used on top of the vector store to perform semantic search to find similar meanings to the search query. Cognitive Search provides Vector Store (currently in private preview) or other stores such as Redis that offer similar capabilities. [Redis store provide ACL](https://redis.com/blog/rediscover-redis-security-with-redis-enterprise-6/) 
