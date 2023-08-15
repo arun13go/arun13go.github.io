@@ -39,6 +39,7 @@ Cognitive search indexes files, documents, and data in order to provide search s
 [Approach details](https://learn.microsoft.com/en-us/azure/search/search-security-trimming-for-azure-search-with-aad).
 
 Unfortunately, the above approach at present supports only whole documents and doesn’t support part of the documents or row- or column-level records.
+
 To overcome this gap, the following alternative approaches are available:
 a)	Build a separate index for each of the user groups based on their profile or group, but it is not scalable if you have too many user groups.
 b)	Build custom RBAC mechanisms in the application as explained in Stage 3.
