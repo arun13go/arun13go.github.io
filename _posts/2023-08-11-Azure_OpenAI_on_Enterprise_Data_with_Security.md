@@ -79,4 +79,4 @@ Once the application (stage 6) is successfully authenticated with AAD tokens, it
 * Log at application level (API management or bespoke) to track OpenAI interaction.
 
 
-At present, these approaches are available as this space is evolving rapidly, so I would expect elegant solutions to be available very soon.
+At present, these approaches are available as this space is evolving rapidly, so I would expect more elegant solutions to be available very soon.
