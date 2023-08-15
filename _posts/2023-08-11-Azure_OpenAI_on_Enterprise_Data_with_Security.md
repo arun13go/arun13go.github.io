@@ -15,7 +15,7 @@ As the organisation wants to monetize the information but faces security challen
 Authentication & Authorisation (AA) come into play in order to provide an appropriate level of security controls.
 Here we will focus on possible approaches on the Azure cloud platform to implement Authentication & Authorisation (AA) to control access. 
 
-Below, high-level reference designs provide an overview of an application.
+Below, high-level reference design provide an overview of an application.
 
 ![alt text](/images/Azure OpenAI Reference Security Architecture.jpg "Azure OpenAI Security")
 
