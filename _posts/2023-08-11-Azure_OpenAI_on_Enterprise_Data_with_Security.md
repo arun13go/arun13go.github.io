@@ -28,6 +28,7 @@ Flow
 **AAD (2):** User credentials are validated and authenticated, and AAD issues a time-bounded authentication token.
 
 **Application (3):** An application (web or chat app) validates AAD tokens and forwards or processes the request to specific services (use case). Ex: Cognitive Search or similar search tools with vector stores will be used for embedding search. AI Document Intelligence or any open source tool used to crack the document to extract entities for summarisation. Similarly, the Azure Video Indexer, Translator, or Whisper API is used to extract transcriptions of the audio and video files.
+
 Authorisation - RBAC (Role Based Access Control):  Now, enforcing fine-grained access at the application level enables control access irrespective of the underlying service or tools used. But it requires building bespoke code to manage access based on the user profile. Though it is not an ideal place, it provides some level of control.
 
 **Stage (4):**
