@@ -17,7 +17,7 @@ Here we will focus on possible approaches on the Azure cloud platform to impleme
 
 Below, high-level reference design provide an overview of an application.
 
-![alt text](/images/Azure OpenAI Reference Security Architecture.jpg "Azure OpenAI Security")
+[![alt text](/images/Azure OpenAI Reference Security Architecture.jpg)](/images/Azure OpenAI Reference Security Architecture.jpg "Azure OpenAI Security")
 
 
 Flow
