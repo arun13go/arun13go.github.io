@@ -43,7 +43,7 @@ Unfortunately, the above approach at present supports only whole documents and d
 To overcome this gap, the following alternative approaches are available:
 
 1. Build a separate index for each of the user groups based on their profile or group, but it is not scalable if you have too many user groups.
-2. Build custom RBAC mechanisms in the application as explained in Stage 3.
+2. Build custom RBAC mechanisms in the application as explained in Stage 3. 
 
 **Vector Store (4-b):**
 Embeddings (the converted binary value of the textual information with semantic context) that are stored in the Vector store. The search tool can be used on top of the vector store to perform semantic search to find similar meanings to the search query. Cognitive Search provides Vector Store (currently in private preview) or other stores such as Redis that offer similar capabilities. [Redis store provide ACL](https://redis.com/blog/rediscover-redis-security-with-redis-enterprise-6/) 
@@ -62,7 +62,10 @@ Similarly, connectors to integrate data sources to retrieve data for OpenAI API 
 
 Also, it enables applications to log or audit the prompting and associated events to track the OpenAI model interaction through API Management (be mindful of throughput implications).
 
-**OpenAI - Authentication (6):** To secure the OpenAI API interaction, there are 2 approaches: a) API keys and b) AAD. It is recommended to use AAD authentication using either managed identity or service principal to grant access with the Azure Services user RBAC role as specified. [here](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal)
+**OpenAI - Authentication (6):** To secure the OpenAI API interaction, there are 2 approaches: 
+1. API keys 
+2. Azure Active Directory (AAD)
+It is recommended to use AAD authentication using either managed identity or service principal to grant access with the Azure Services user RBAC role as specified. [here](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal)
 
 AAD provides benefits over a static API key, which is exposed at the app level. OpenAI does provide API keys, but it requires compliance with organisation security standards such as key rotation and API keys allow users to have full access to operations such as model deployment, managing training data, fine tuning, and listing all available models. So controlling API key access can be done, but it still needs to be configured in RBAC to secure the access.
 
