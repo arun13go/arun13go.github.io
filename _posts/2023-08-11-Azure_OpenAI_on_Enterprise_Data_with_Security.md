@@ -68,7 +68,7 @@ It is recommended to use AAD authentication using either managed identity or ser
 AAD provides benefits over a static API key, which is exposed at the app level. OpenAI does provide API keys, but it requires compliance with organisation security standards such as key rotation and API keys allow users to have full access to operations such as model deployment, managing training data, fine tuning, and listing all available models. So controlling API key access can be done, but it still needs to be configured in RBAC to secure the access.
 
 **OpenAI service (7):**
-Once the application (stage 6) is successfully authenticated with AAD tokens, it can have interaction with the OpenAI API model either via Python or API calls.
+Application use service principal, or managed identity which will have an assigned role to access OpenAI resources. Azure OpenAI offers different levels of permission using [RBAC](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/role-based-access-control) which enables an authorization system for managing individual access to Azure OpenAI resources. Once the application (stage 6) is successfully authenticated with AAD tokens, it can interact with the OpenAI API model either via Python or API calls.
 
 
 **Summary:**
