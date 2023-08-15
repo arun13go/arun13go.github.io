@@ -11,9 +11,9 @@ tags:
 Azure OpenAI Service provides powerful large language models (LLM) which can be used in many use cases (searching, knowledge mining, summarisation, classification, and sentiment analysis) and bring massive value to businesses by looking at both structured and unstructured data. 
 Organisations are beginning to explore and, in fact, opt in to Azure OpenAI to uncover largely untapped insights effectively on their unstructured data, such as Team Chat, Slack conversion, Teams Video / audio calls, Internal documents, messages, emails, and images that are stored across different ecosystems, e.g., SharePoint, collaboration tools (JIRA, Confluence), internal sites, and data stores.
 
-As the organisation wants to monetize the information but faces security challenges to protect the sensitive data. They want these capabilities, but personas who have access to this info should be restricted based on their user profile. Ex HR functions want employees to search and chat with data about HR-related queries and policies; however, their access should be restricted based on their profile, and they should not have to access other' confidential info such as personal details, pay, and grade. Similarly, organisations have multiple business units, which require separation of access with a lot of restrictions on documents or files based on their business units. This requires appropriate security control (fine-grained access control) in order to protect the confidentiality of the data based on the persona’s profile or access level within the organisation.
+As the organisation wants to utilise the information but faces security challenges to protect the sensitive data. They want these capabilities, but personas who have access to this info should be restricted based on their user profile. Ex HR functions want employees to search and chat with data about HR-related queries and policies; however, their access should be restricted based on their profile, and they should not have to access other' confidential info such as personal details, pay, and grade. Similarly, organisations have multiple business units, which require separation of access with a lot of restrictions on documents or files based on their business units. This requires appropriate security control (fine-grained access control) in order to protect the confidentiality of the data based on the persona’s profile or access level within the organisation.
 Authentication & Authorisation (AA) come into play in order to provide an appropriate level of security controls.
-Here we will focus on possible approaches on the Azure cloud platform to implement Authentication & Authorisation (AA) to control access. 
+Here we will focus on possible approaches on the Azure cloud platform to implement Authentication & Authorisation to control access. 
 
 Below, high-level reference design provide an overview of an application.
 
@@ -34,7 +34,7 @@ Authorisation - RBAC (Role Based Access Control):  Now, enforcing fine-grained 
 **Stage (4):**
 Here, use case specific services come into play and enforce fine-grained access based on the user profile. Azure provides RBAC (Role Based Access Control) across some of these services. In stages (a–e), any one of the services or combination of services can be used, considering the use case and its complexity, so it’s possible to employ RBAC in any one of the services.
 
-**Cog Search (4-a):**
+**Cognitive Search (4-a):**
 Cognitive search indexes files, documents, and data in order to provide search services. Cognitive search comes with filters to deny access to documents by trimming results based on user profiles. This can be done as part of the [indexing with associated groups (the user should be part of the group)](https://learn.microsoft.com/en-us/azure/search/search-security-trimming-for-azure-search-with-aad).
 
 Unfortunately, the above approach at present supports only whole documents and doesn’t support part of the documents or row- or column-level records.To overcome this gap, the following alternative approaches are available:
