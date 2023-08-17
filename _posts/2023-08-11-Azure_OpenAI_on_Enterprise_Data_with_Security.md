@@ -3,9 +3,9 @@ title: 'Azure OpenAI on Enterprise Data with Security'
 date: 11-08-2023
 permalink: /posts/2023/08/Azure_OpenAI_on_Enterprise_Data_with_Security/
 tags:
-  - OpenAI Security
-  - Azure
-  - Authenitcation & Authorisation
+  - Azure OpenAI Security
+  - Azure OpenAI RBAC
+  - Azure OpenAI Authenitcation & Authorisation
 ---
 
 Azure OpenAI Service provides powerful large language models (LLM) which can be used in many use cases (searching, knowledge mining, summarisation, classification, and sentiment analysis) and bring massive value to businesses by looking at both structured and unstructured data. 
