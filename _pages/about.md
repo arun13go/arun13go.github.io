@@ -11,3 +11,10 @@ redirect_from:
 Sharing my learning and thougths about Architecture, Cloud, AI, Data Science
 
 [Please check this out](/year-archive/)
+
+{% include base\_path %} {% capture written\_year %}'None'{% endcapture %} {% for post in site.posts %} {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %} {% if year != written\_year %}
+
+{{ year }}
+----------
+
+{% capture written\_year %}{{ year }}{% endcapture %} {% endif %} {% include archive-single.html %} {% endfor %}
