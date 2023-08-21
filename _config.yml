@@ -10,7 +10,7 @@ locale                   : "en-US"
 title                    : "ArunGo'Log"
 title_separator          : "-"
 name                     : &name "Arungo"
-description              : &description "Hi there, welcome to my blob. My thougts and leanrings are shared here"
+description              : &description "Hi there, welcome to my blog. My thougts and leanrings are shared here"
 url                      : https://arun13go.github.io
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "arun13go/arungo13.github.io"
