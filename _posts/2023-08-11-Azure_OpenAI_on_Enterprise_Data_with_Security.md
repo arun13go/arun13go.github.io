@@ -73,7 +73,7 @@ Application use service principal, or managed identity which will have an assign
 **Summary:**
 
 * Use AAD to authenticate the user request without exposing the OpenAI API Key.
-* Enforce authorisation (fine-grained access) at the data source level if possible or application level customer code to build security filters.
+* Enforce authorisation (fine-grained access) at the data source level if possible or application level custom code to build security filters.
 * A combination of use case specific services can also offer RBAC, but it involves complexity.
 * Leverage Azure OpenAI RBAC to assigne role to service principal, or managed identity to contorl the LL Model access
 * Enable logging at the application level (either API management or bespoke) to track OpenAI interaction.
